@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/purple"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingTop="250dp"
+    android:paddingBottom="50dp"
+    tools:context=".MainActivity">
+
+
+    <EditText
+        android:id="@+id/editTextView"
+        android:layout_width="315dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="8dp"
+        android:autofillHints="name"
+        android:inputType="text"
+        android:text="@string/hello"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        tools:ignore="LabelFor" />
+
+    <Button
+        android:id="@+id/buttonView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/lightPurple"
+        android:text="@string/click_here"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:textSize="16sp"
+        tools:ignore="TextViewEdits" />
+
+
+</LinearLayout>

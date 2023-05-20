@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">FragmentActivities</string>
+    <string name="im_the_beta_one">I\'m the screen one!</string>
+    <string name="im_the_beta_two">I\'m the screen two!</string>
+    <string name="im_the_beta_three">I\'m the screen three!</string>
+    <string name="hello_i_m_the_main_activity">Hello I\'m the main activity!</string>
+    <string name="click_me">Click me</string>
+</resources>
