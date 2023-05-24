@@ -1,4 +1,4 @@
-package com.example.customviewaplication
+package com.example.customviewaplication.data
 
 data class CondoUnit(
     var id: String,

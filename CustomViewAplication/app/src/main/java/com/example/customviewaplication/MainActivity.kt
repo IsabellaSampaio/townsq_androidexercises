@@ -1,29 +1,43 @@
 package com.example.customviewaplication
 
-import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
+import com.example.customviewaplication.data.CondoUnit
+import com.example.customviewaplication.ui.adapter.UnitiesAdapter
+import com.example.customviewaplication.ui.components.SearchBarView
+import com.example.customviewaplication.ui.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
-    private var condoCardView: CustomViewCard? = null
+    private var searchBar: SearchBarView? = null
+    private var unitiesRecyclerView: RecyclerView? = null
+    private var unitiesAdapter: UnitiesAdapter = UnitiesAdapter()
+
+    private var mainViewModel: MainViewModel? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        condoCardView = findViewById(R.id.condo_unit_card)
+        mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
+        searchBar = findViewById(R.id.searchBar)
+        unitiesRecyclerView = findViewById(R.id.unitiesList)
         setupViews()
     }
 
-    private fun setupViews(){
-        condoCardView?.newInstance(mockCondoUnitView())
+    private fun setupViews() {
+        setupAdapter(mainViewModel?.unitiesList.orEmpty())
+        searchBar?.newInstance { newQuery ->
+            mainViewModel?.onQueryChanged(newQuery)
+            setupAdapter(mainViewModel?.filteredList.orEmpty())
+        }
     }
 
-    private fun mockCondoUnitView(): CondoUnit{
-        return CondoUnit(
-            id = "1",
-            unityName = "Mountain Ranch Luxury",
-            unityDescription = "Aspen Grove Ranch is a truly elegant Colorado estate with out-of-this-world Rocky Mountain views.",
-            url = "https://www.mountainliving.com/content/uploads/data-import/9882388e/ColoradoRanch0614Exterior0157-fdc41d50.jpg"
-        )
+    private fun setupAdapter(unitiesList: List<CondoUnit>) {
+        unitiesRecyclerView?.adapter = unitiesAdapter
+        unitiesAdapter.setUnities(unitiesList)
     }
+
+
 }
