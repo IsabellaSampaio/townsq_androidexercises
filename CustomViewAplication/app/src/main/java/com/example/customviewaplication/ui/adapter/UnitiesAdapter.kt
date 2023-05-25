@@ -19,7 +19,8 @@ class UnitiesAdapter : RecyclerView.Adapter<UnitiesAdapter.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.condo_unit_card, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.condo_unit_card, parent, false)
         return ViewHolder(view)
     }
 
@@ -34,7 +35,8 @@ class UnitiesAdapter : RecyclerView.Adapter<UnitiesAdapter.ViewHolder>() {
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private var condoImageView: ImageView? = view.findViewById(R.id.condo_image_view)
         private var unityNameTextView: TextView? = view.findViewById(R.id.unity_name_text_view)
-        private var unityDescriptionTextView: TextView? = view.findViewById(R.id.unity_description_text_view)
+        private var unityDescriptionTextView: TextView? =
+            view.findViewById(R.id.unity_description_text_view)
 
         fun bind(unit: CondoUnit) {
             unityNameTextView?.text = unit.unityName

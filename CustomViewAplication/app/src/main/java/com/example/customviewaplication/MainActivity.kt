@@ -1,8 +1,8 @@
 package com.example.customviewaplication
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.customviewaplication.data.CondoUnit
 import com.example.customviewaplication.ui.adapter.UnitiesAdapter
@@ -14,12 +14,11 @@ class MainActivity : AppCompatActivity() {
     private var unitiesRecyclerView: RecyclerView? = null
     private var unitiesAdapter: UnitiesAdapter = UnitiesAdapter()
 
-    private var mainViewModel: MainViewModel? = null
+    private val mainViewModel: MainViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         searchBar = findViewById(R.id.searchBar)
         unitiesRecyclerView = findViewById(R.id.unitiesList)
@@ -27,10 +26,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
-        setupAdapter(mainViewModel?.unitiesList.orEmpty())
+        setupAdapter(mainViewModel.unitiesList.value.orEmpty())
         searchBar?.newInstance { newQuery ->
-            mainViewModel?.onQueryChanged(newQuery)
-            setupAdapter(mainViewModel?.filteredList.orEmpty())
+            mainViewModel.onQueryChanged(newQuery)
+            setupAdapter(mainViewModel.filteredList)
+        }
+        observeData()
+    }
+
+    private fun observeData() {
+        mainViewModel.unitiesList.observe(this) { unities ->
+            setupAdapter(unities)
         }
     }
 

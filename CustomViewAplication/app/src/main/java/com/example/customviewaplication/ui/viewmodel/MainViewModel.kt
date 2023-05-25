@@ -1,20 +1,26 @@
 package com.example.customviewaplication.ui.viewmodel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.customviewaplication.data.CondoUnit
 
 class MainViewModel : ViewModel() {
     var filteredList: List<CondoUnit> = listOf()
 
-    private val _unitiesList: MutableList<CondoUnit> = mockCondoUnitView()
-    val unitiesList: List<CondoUnit> = _unitiesList
+    private val _unitiesList: MutableLiveData<List<CondoUnit>> = MutableLiveData()
+    val unitiesList: LiveData<List<CondoUnit>> = _unitiesList
 
-    fun onQueryChanged(query: String) {
-        this.filteredList = _unitiesList.filter { unit -> unit.unityName.contains(query) }
+    init {
+        _unitiesList.value = mockCondoUnitView()
     }
 
-    private fun mockCondoUnitView(): MutableList<CondoUnit> {
-        return mutableListOf(
+    fun onQueryChanged(query: String) {
+        this.filteredList = _unitiesList.value?.filter { unit -> unit.unityName.contains(query) }.orEmpty()
+    }
+
+    private fun mockCondoUnitView(): List<CondoUnit> {
+        return listOf(
             CondoUnit(
                 id = "1",
                 unityName = "Mountain Ranch Luxury",
@@ -51,7 +57,7 @@ class MainViewModel : ViewModel() {
                 unityDescription = "Handcrafted finishes create the feeling of old-school rustic living with all the comforts of a modern home.",
                 url = "https://www.mountainliving.com/content/uploads/data-import/9882388e/Pagosaext-9d37cae1.jpg"
             )
-
         )
     }
+
 }
