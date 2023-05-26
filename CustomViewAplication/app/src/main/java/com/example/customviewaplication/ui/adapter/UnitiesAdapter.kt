@@ -39,9 +39,9 @@ class UnitiesAdapter : RecyclerView.Adapter<UnitiesAdapter.ViewHolder>() {
             view.findViewById(R.id.unity_description_text_view)
 
         fun bind(unit: CondoUnit) {
-            unityNameTextView?.text = unit.unityName
-            unityDescriptionTextView?.text = unit.unityDescription
-            condoImageView?.load(unit.url)
+            unityNameTextView?.text = unit.unitName
+            unityDescriptionTextView?.text = unit.unitDescription
+            condoImageView?.load(unit.unitPictureURL)
         }
     }
 }

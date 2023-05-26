@@ -4,7 +4,7 @@ import com.example.customviewaplication.data.CondoUnit
 import com.example.customviewaplication.ui.retrofit.RetroFit
 import java.io.IOException
 
-class MainDataSource {
+class MainRemoteDataSource {
 
     private val service: MainService = getServiceInstance()
 

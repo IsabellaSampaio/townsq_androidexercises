@@ -5,11 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.customviewaplication.data.CondoUnit
-import com.example.customviewaplication.data.main.MainDataSource
-import kotlinx.coroutines.Dispatchers
+import com.example.customviewaplication.data.main.MainRepository
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val mainDataSource: MainDataSource = MainDataSource()) : ViewModel() {
+class MainViewModel(private val mainRepository: MainRepository = MainRepository()) : ViewModel() {
     private val _unitiesList: MutableLiveData<List<CondoUnit>> = MutableLiveData()
     val unitiesList: LiveData<List<CondoUnit>> = _unitiesList
 
@@ -21,12 +20,12 @@ class MainViewModel(private val mainDataSource: MainDataSource = MainDataSource(
         if (query.isEmpty()) {
             fetchData()
         }
-        _unitiesList.value = _unitiesList.value?.filter { unit -> unit.unityName?.contains(query) == true } ?: listOf()
+        _unitiesList.value = _unitiesList.value?.filter { unit -> unit.unitName.contains(query)}
     }
 
     private fun fetchData() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val data = mainDataSource.getUnities()
+        viewModelScope.launch {
+            val data = mainRepository.getUnities()
             if (data.isSuccess) {
                 _unitiesList.postValue(data.getOrDefault(listOf()))
             } else {

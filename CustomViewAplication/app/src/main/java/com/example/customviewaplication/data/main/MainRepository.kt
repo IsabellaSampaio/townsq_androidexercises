@@ -1,6 +1,6 @@
 package com.example.customviewaplication.data.main
 
-class MainRepository(private val mainDataSource: MainDataSource = MainDataSource()) {
+class MainRepository(private val mainDataSource: MainRemoteDataSource = MainRemoteDataSource()) {
 
     suspend fun getUnities() = mainDataSource.getUnities()
 
