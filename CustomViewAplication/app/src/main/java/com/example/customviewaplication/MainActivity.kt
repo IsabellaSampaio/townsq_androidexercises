@@ -5,12 +5,11 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.customviewaplication.data.CondoUnit
-import com.example.customviewaplication.data.main.MainDataSource
 import com.example.customviewaplication.ui.adapter.UnitiesAdapter
 import com.example.customviewaplication.ui.components.SearchBarView
 import com.example.customviewaplication.ui.viewmodel.MainViewModel
 
-class MainActivity() : AppCompatActivity() {
+class MainActivity: AppCompatActivity() {
     private var searchBar: SearchBarView? = null
     private var unitiesRecyclerView: RecyclerView? = null
     private var unitiesAdapter: UnitiesAdapter = UnitiesAdapter()
@@ -24,13 +23,13 @@ class MainActivity() : AppCompatActivity() {
         searchBar = findViewById(R.id.searchBar)
         unitiesRecyclerView = findViewById(R.id.unitiesList)
         setupViews()
+        setupBindings()
     }
 
     private fun setupViews() {
         searchBar?.newInstance { newQuery ->
             mainViewModel.onQueryChanged(newQuery)
         }
-        setupBindings()
     }
 
     private fun setupBindings() {
