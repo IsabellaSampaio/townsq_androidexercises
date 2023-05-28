@@ -1,18 +1,20 @@
-package com.example.customviewaplication
+package com.example.customviewaplication.ui.list
 
+import com.example.customviewaplication.ui.details.UnitDetailsActivity
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.customviewaplication.R
 import com.example.customviewaplication.data.CondoUnit
-import com.example.customviewaplication.ui.adapter.UnitiesAdapter
 import com.example.customviewaplication.ui.components.SearchBarView
-import com.example.customviewaplication.ui.viewmodel.MainViewModel
+import com.example.customviewaplication.ui.list.adapter.UnitiesAdapter
 
 class MainActivity: AppCompatActivity() {
     private var searchBar: SearchBarView? = null
     private var unitiesRecyclerView: RecyclerView? = null
-    private var unitiesAdapter: UnitiesAdapter = UnitiesAdapter()
+    private var unitiesAdapter: UnitiesAdapter? = null
 
     private val mainViewModel: MainViewModel by viewModels()
 
@@ -39,8 +41,13 @@ class MainActivity: AppCompatActivity() {
     }
 
     private fun setupAdapter(unitiesList: List<CondoUnit>) {
+        unitiesAdapter = UnitiesAdapter { unitId ->
+            val intent = Intent(this, UnitDetailsActivity::class.java)
+            intent.putExtra(UnitDetailsActivity.ARG_UNIT_ID, unitId)
+            startActivity(intent)
+        }
         unitiesRecyclerView?.adapter = unitiesAdapter
-        unitiesAdapter.setUnities(unitiesList)
+        unitiesAdapter?.setUnities(unitiesList)
     }
 
 }

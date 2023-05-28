@@ -1,4 +1,4 @@
-package com.example.customviewaplication.ui.retrofit
+package com.example.customviewaplication.data.retrofit
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

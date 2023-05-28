@@ -19,9 +19,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:autofillHints="no"
-            android:hint="@string/eg_mountain_ranch"
+            android:hint="@string/eg_mock_unit_3"
             android:inputType="text"
-            android:textColorHint="@color/black" />
+            android:textColorHint="@color/gray" />
 
         <ImageButton
             android:id="@+id/searchIconButton"

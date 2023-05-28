@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".MainActivity">
+    tools:context=".ui.list.MainActivity">
 
     <com.example.customviewaplication.ui.components.SearchBarView
         android:id="@+id/searchBar"

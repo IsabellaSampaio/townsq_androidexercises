@@ -1,4 +1,4 @@
-package com.example.customviewaplication.ui.viewmodel
+package com.example.customviewaplication.ui.list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.customviewaplication.data.CondoUnit
 import com.example.customviewaplication.data.main.MainRepository
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class MainViewModel(private val mainRepository: MainRepository = MainRepository()) : ViewModel() {
     private val _unitiesList: MutableLiveData<List<CondoUnit>> = MutableLiveData()
@@ -26,10 +27,10 @@ class MainViewModel(private val mainRepository: MainRepository = MainRepository(
     private fun fetchData() {
         viewModelScope.launch {
             val data = mainRepository.getUnities()
-            if (data.isSuccess) {
+            try{
                 _unitiesList.postValue(data.getOrDefault(listOf()))
-            } else {
-                println("An error has occurred, trying to recover")
+            } catch(e: Exception) {
+                println(e.message)
             }
         }
     }

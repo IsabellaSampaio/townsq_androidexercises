@@ -4,5 +4,10 @@
     <string name="input_text">input text</string>
     <string name="some_image">image</string>
     <string name="search_bar_description">search bar description</string>
-    <string name="eg_mountain_ranch">eg: Mountain Ranch...</string>
+    <string name="sorry_we_weren_t_able_to_fetch_the_data_requested">Sorry, we weren\'t able to fetch the data requested</string>
+    <string name="retry">Retry</string>
+    <string name="condo_unit_app">Condo Unit App</string>
+    <string name="proceed">Proceed</string>
+    <string name="testing">testing</string>
+    <string name="eg_mock_unit_3">eg: Mock Unit #3</string>
 </resources>

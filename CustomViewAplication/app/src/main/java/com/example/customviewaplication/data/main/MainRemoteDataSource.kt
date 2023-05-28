@@ -1,7 +1,7 @@
 package com.example.customviewaplication.data.main
 
 import com.example.customviewaplication.data.CondoUnit
-import com.example.customviewaplication.ui.retrofit.RetroFit
+import com.example.customviewaplication.data.retrofit.RetroFit
 import java.io.IOException
 
 class MainRemoteDataSource {
