@@ -80,7 +80,7 @@ class UnitDetailsActivity : AppCompatActivity() {
             residentsList?.setResidents(unit.residents)
 
             toolbar?.title = unit.unitName
-            unitPicture?.load(unit.unitPictureURL)
+            unitPicture?.load(unit.unitPicture)
 
         }
 

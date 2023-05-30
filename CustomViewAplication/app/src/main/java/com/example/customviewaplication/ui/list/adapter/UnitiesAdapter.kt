@@ -42,7 +42,7 @@ class UnitiesAdapter(private val onCardClicked: (String) -> Unit) : RecyclerView
         fun bind(unit: CondoUnit) {
             unityNameTextView?.text = unit.unitName
             unityDescriptionTextView?.text = unit.unitDescription
-            condoImageView?.load(unit.unitPictureURL)
+            condoImageView?.load(unit.unitPicture)
             viewRoot.setOnClickListener{
                 onCardClicked(unit.id)
             }
