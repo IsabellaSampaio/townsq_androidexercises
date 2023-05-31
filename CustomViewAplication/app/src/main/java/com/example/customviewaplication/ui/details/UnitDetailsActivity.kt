@@ -72,27 +72,31 @@ class UnitDetailsActivity : AppCompatActivity() {
     }
 
     private fun setupBindings() {
-        unitDetailsViewModel?.unitDetails?.observe(this) { unit ->
-            residentsRecyclerView?.layoutManager =
-                GridLayoutManager(this, getSpanCount(residentsList?.itemCount))
-            residentsList = ResidentsAdapter()
-            residentsRecyclerView?.adapter = residentsList
-            residentsList?.setResidents(unit.residents)
+        unitDetailsViewModel?.uiState?.observe(this) { uiState ->
+            when (uiState) {
+                is MainUiState.Loading -> {
+                    loadingView?.isVisible = false
+                    errorView?.isVisible = false
+                }
 
-            toolbar?.title = unit.unitName
-            unitPicture?.load(unit.unitPicture)
+                is MainUiState.Error -> {
+                    loadingView?.isVisible = false
+                    errorView?.isVisible = true
+                }
 
+                is MainUiState.Success -> {
+                    val unit = uiState.unities
+                    residentsRecyclerView?.layoutManager =
+                        GridLayoutManager(this, getSpanCount(residentsList?.itemCount))
+                    residentsList = ResidentsAdapter()
+                    residentsRecyclerView?.adapter = residentsList
+                    unit?.residents?.let { residentsList?.setResidents(it) }
+
+                    toolbar?.title = unit?.unitName
+                    unitPicture?.load(unit?.unitPicture)
+                }
+            }
         }
-
-        unitDetailsViewModel?.loading?.observe(this) { loader ->
-            loadingView?.isVisible = loader
-        }
-
-        unitDetailsViewModel?.error?.observe(this) { error ->
-            errorView?.isVisible = error
-
-        }
-
 
     }
 
