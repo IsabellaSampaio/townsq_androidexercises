@@ -9,7 +9,7 @@ import com.example.customviewaplication.data.main.MainRepository
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class MainViewModel(private val mainRepository: MainRepository = MainRepository()) : ViewModel() {
+class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
     private val _unitiesList: MutableLiveData<List<CondoUnit>> = MutableLiveData()
     val unitiesList: LiveData<List<CondoUnit>> = _unitiesList
 

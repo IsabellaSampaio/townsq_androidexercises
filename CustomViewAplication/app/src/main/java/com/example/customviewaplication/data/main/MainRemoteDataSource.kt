@@ -4,13 +4,7 @@ import com.example.customviewaplication.data.CondoUnit
 import com.example.customviewaplication.data.retrofit.RetroFit
 import java.io.IOException
 
-class MainRemoteDataSource {
-
-    private val service: MainService = getServiceInstance()
-
-    private fun getServiceInstance() : MainService{
-        return RetroFit.getInstance().create(MainService::class.java)
-    }
+class MainRemoteDataSource(private val service : MainService) {
 
     suspend fun getUnities(): Result<List<CondoUnit>> {
         val response = service.getUnities()

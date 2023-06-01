@@ -1,5 +1,6 @@
 package com.example.customviewaplication.ui.details
 
+import UnitDetailsViewModelFactory
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -11,8 +12,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.customviewaplication.R
-import com.example.customviewaplication.data.details.UnitDetailsViewModelFactory
+import com.example.customviewaplication.data.details.UnitDetailsMainRepository
 import com.example.customviewaplication.ui.list.adapter.ResidentsAdapter
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class UnitDetailsActivity : AppCompatActivity() {
 
@@ -23,7 +27,8 @@ class UnitDetailsActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
     private var unitPicture: ImageView? = null
 
-    private var unitDetailsViewModel: UnitDetailsViewModel? = null
+    private val unitDetailsViewModel: UnitDetailsViewModel by viewModel()
+
     private var errorView: ConstraintLayout? = null
     private var loadingView: ConstraintLayout? = null
 
@@ -62,14 +67,12 @@ class UnitDetailsActivity : AppCompatActivity() {
     private fun instantiateViewModel() {
         val unitId = intent.getStringExtra(ARG_UNIT_ID)
         unitId?.let {
-            val viewModelFactory = UnitDetailsViewModelFactory(it)
-            //passando o contexto e fazendo e o get com o class.java
-            unitDetailsViewModel =
-                ViewModelProvider(this, viewModelFactory)[UnitDetailsViewModel::class.java]
-            unitDetailsViewModel?.fetchUnitData()
-
+            val viewModelFactory = UnitDetailsViewModelFactory(unitId)
+            val unitDetailsViewModel = ViewModelProvider(this, viewModelFactory).get(UnitDetailsViewModel::class.java)
+            unitDetailsViewModel.fetchUnitData()
         }
     }
+
 
     private fun setupBindings() {
         unitDetailsViewModel?.uiState?.observe(this) { uiState ->

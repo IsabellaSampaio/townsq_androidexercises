@@ -10,13 +10,14 @@ import com.example.customviewaplication.R
 import com.example.customviewaplication.data.CondoUnit
 import com.example.customviewaplication.ui.components.SearchBarView
 import com.example.customviewaplication.ui.list.adapter.UnitiesAdapter
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity: AppCompatActivity() {
     private var searchBar: SearchBarView? = null
     private var unitiesRecyclerView: RecyclerView? = null
     private var unitiesAdapter: UnitiesAdapter? = null
 
-    private val mainViewModel: MainViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

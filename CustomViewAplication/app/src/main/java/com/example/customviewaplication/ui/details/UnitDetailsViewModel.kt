@@ -9,7 +9,7 @@ import com.example.customviewaplication.data.details.UnitDetailsMainRepository
 import kotlinx.coroutines.launch
 
 class UnitDetailsViewModel(
-    private val unitDetailsMainRepository: UnitDetailsMainRepository = UnitDetailsMainRepository(),
+    private val unitDetailsMainRepository: UnitDetailsMainRepository?,
     private val unitId: String
 ) :
     ViewModel() {
@@ -24,9 +24,9 @@ class UnitDetailsViewModel(
         viewModelScope.launch {
             emitUiState(MainUiState.Loading)
             try {
-                val result = unitDetailsMainRepository.getUnit(unitId)
+                val result = unitDetailsMainRepository?.getUnit(unitId)
                 emitUiState(
-                    MainUiState.Success(result.getOrNull())
+                    MainUiState.Success(result?.getOrNull())
                 )
             } catch (e: Exception) {
                 println(e.message)
