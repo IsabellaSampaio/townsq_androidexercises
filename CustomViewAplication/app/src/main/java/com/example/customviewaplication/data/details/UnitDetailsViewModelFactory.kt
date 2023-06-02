@@ -8,7 +8,7 @@ class UnitDetailsViewModelFactory(
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(UnitDetailsViewModel::class.java)) {
-            return UnitDetailsViewModel(null,unitId = unitId) as T
+            return UnitDetailsViewModel(null, unitId = unitId) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
